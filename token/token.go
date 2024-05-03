@@ -14,17 +14,30 @@ const (
 	// keywords
 	FUNCTION = "FUNCTION"
 	LET      = "LET"
+	FALSE    = "FALSE"
+	IF       = "IF"
+	ELSE     = "ELSE"
+	RETURN   = "RETURN"
+	TRUE     = "TRUE"
 
 	//Identifiers + literals
 	INT   = "INT"
 	IDENT = "IDENT"
 
 	// Operators
-	MUX      = "*"
-	EQUALITY = "=="
-	ASSIGN   = "="
-	PLUS     = "+"
-	MINUS    = "-"
+	MUX       = "*"
+	EQ        = "=="
+	NOT_EQ    = "!="
+	ASSIGN    = "="
+	PLUS      = "+"
+	MINUS     = "-"
+	DECREMENT = "--"
+	INCREMENT = "++"
+	BANG      = "!"
+	ASTERISK  = "*"
+	SLASH     = "/"
+	LT        = "<"
+	GT        = ">"
 
 	// Delimiters
 	COMMA     = ","
@@ -34,3 +47,20 @@ const (
 	LBRACE    = "{"
 	RBRACE    = "}"
 )
+
+var keywords = map[string]TokenType{
+	"fn":     FUNCTION,
+	"let":    LET,
+	"true":   TRUE,
+	"false":  FALSE,
+	"return": RETURN,
+	"if":     IF,
+	"else":   ELSE,
+}
+
+func IdentifierType(ident string) TokenType {
+	if val, ok := keywords[ident]; ok {
+		return val
+	}
+	return IDENT
+}
